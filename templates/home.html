@@ -1,2 +1,23 @@
-<!DOCTYPE html>
-<h1>Hello welcome To Project</h1>
+{% extends "base.html"%}
+<h1>{% block title %}{% endblock %}</h1>
+
+{%block maincontents %}
+
+<a href="{% url 'createpost' %}">create post</a>
+{% for posts in object_list %}
+<div class="container">
+    <ul>
+        <li><h6><a href="{% url 'post_details_path' posts.pk %}">{{posts.Title}} </a>- {{posts.Author}}</h6></li>
+        <li>{{ posts.Postcategory }}</li>
+        <li>{{ posts.Created_on }}</li>
+    </ul>
+    
+    <div class="container">
+        {{ posts.Contents|slice:":150"}}
+    </div>
+    <hr>
+</div>
+
+
+{% endfor %}
+{% endblock %}
